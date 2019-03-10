@@ -168,8 +168,9 @@ console.log("page function running")
     var nextPage = setTimeout(function () {
         $("#answers").empty();
         timer = 20;
+        
 
-        if ((incorrectCounter + correctCounter + unansweredCounter) === questionCount.length) {
+        if ((incorrectCounter + correctCounter + unansweredCounter) === questionCount) {
            console.log ("checking page function if else")
             $("#questions").empty();
             $("#questions").html("<h3> Game Over!</h3>");
