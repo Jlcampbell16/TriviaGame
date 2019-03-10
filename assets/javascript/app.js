@@ -1,29 +1,45 @@
 var questionsArray = [
     {
-        question: "Question 1",
-        answerList: ["Q1-option 1", "Q1-option 2", "Q1-option 3", "Q1-option 4"],
+        question: "Which animal has the longest lifespan?",
+        answerList: ["Elephant", "Blue Whale", "Giant Tortoise", "Parrot"],
+        answer: 2
+    },
+    {
+        question: "How many times can a hummingbird flap its wings per second?",
+        answerList: ["60", "80", "100", "120"],
         answer: 1
     },
     {
-        question: "Question 2",
-        answerList: ["Q2-choice 1", "Q2-choice 2", "Q2-choice 3", "Q2-choice 4"],
+        question: "Which two parts of a giraffe’s body are about the same length?",
+        answerList: ["Legs and ossicones", "Neck and tail", "Head and tail", "Ossicones and tail"],
+        answer: 1
+    },
+    {
+        question: "A large group of kangaroos is called?",
+        answerList: ["A pack", "A quorum", "A herd", "A mob"],
+        answer: 3
+    },
+    {
+        question: "Which newborn baby whale can gain weight at the rate of 10 per hour?",
+        answerList: ["Blue Whale", "Killer Whale", "Sperm Whale", "Humpback Whale"],
         answer: 0
     },
     {
-        question: "Question 3",
-        answerList: ["Q3-option 1", "Q3-option 2", "Q3-option 3", "Q3-option 4"],
-        answer: 1
+        question: "Why is a flamingo pink?",
+        answerList: ["They are born that way", "Sunburn", "From the shrimp and algae they eat", "Camouflage"],
+        answer: 2
     },
     {
-        question: "Question 4",
-        answerList: ["Q4-option 1", "Q4-option 2", "Q4-option 3", "Q4-option 4"],
-        answer: 1
+        question: "What do you call a baby Alpaca?",
+        answerList: ["Kit", "Chick", "Calf", "Cria"],
+        answer: 3
     },
     {
-        question: "Question 5",
-        answerList: ["Q5-option 1", "Q5-option 2", "Q5-option 3", "Q5-option 4"],
-        answer: 1
-    },]
+        question: "What is a rhino’s horn made of?",
+        answerList: ["Tightly packed hair", "Bone", "Cartliage", "Ivory"],
+        answer: 0
+    }
+];
 
 
 var userGuess = "";
@@ -43,8 +59,8 @@ var index;
 console.log(questionsArray)
 
 // -----------------------------------------------------------------------
-// RESET BUTTON
 
+$("#reset").hide();
 
 
 
@@ -62,20 +78,18 @@ $("#startBtn").on("click", function () {
     for (var i = 0; i < questionsArray.length; i++) {
         holder.push(questionsArray[i]);
     }
-
-})
+});
 
 //run timer
 //clear it each time
 //START TIMER
 function runTimer() {
-    // clearInterval(timerInterval);
+    clearInterval(timerInterval);
     if (!running) {
         timerInterval = setInterval(decrement, 1000);
         running = true;
-    }
-
-}
+    };
+};
 
 //count down the timer
 //if the counter reached 0, go the to results page
@@ -89,18 +103,17 @@ function decrement() {
     if (timer === 0) {
         // clearInterval(timerInterval)
         stop();
-        alert("Your time is up!");
-        $("#answers").html("<p> The correct answer is: " + pick.answerList[pick.answer] + "</p>");
-        incorrectCounter++;
-        endPage();
+        $("#answers").html("<p> Time is up! The correct answer is: " + pick[pick.answer] + "</p>");
+        unansweredCounter++;
+        page();
     }
-}
+};
 
 //TIMER STOP
 function stop() {
     running = false;
-    clearInterval(timerInterval)
-}
+    clearInterval(timerInterval);
+};
 
 
 // display 10 travia questions & answers
@@ -123,40 +136,41 @@ function displayQuestions() {
         userChoice.html(pick.answerList[i]);
         userChoice.attr("data-guessvalue", i);
         $("#answers").append(userChoice);
-    }
+    };
 
     $(".answerChoice").on("click", function () {  //new class above
         userGuess = parseInt($(this).attr("data-guessvalue"));
         if (userGuess === pick.answer) {
-            stop()
+            stop();
             correctCounter++;
             userGuess = "";
             $("#answers").html("<p>Correct!</p>");
-            endPage()
+            page();
         } else {
-            stop()
+            stop();
             incorrectCounter++;
             userGuess = "";
-            $("#answers").html("<p>Wrong! The correct answer is: " + pick.answerList[pick.answer] + "</p>");
-            endPage();
+            $("#answers").html("<p>Nice try! The correct answer is: " + pick.answerList[pick.answer] + "</p>");
+            page();
         }
-    })
-}
+    });
+};
+
 //hide the questions 
 //hide the timer
 //add the correct answers & incorrect answer
 //display correct answers & incorrect answers on the page
-function endPage() {
-
+function page() {
+console.log("page function running")
     newArray.push(pick);
     questionsArray.splice(index, 1);
 
-    // var endPage = setTimeout(function () {
-        // $("#answers").empty();
-        // timer = 20;
-
+    var nextPage = setTimeout(function () {
+        $("#answers").empty();
+        timer = 20;
 
         if ((incorrectCounter + correctCounter + unansweredCounter) === questionCount.length) {
+           console.log ("checking page function if else")
             $("#questions").empty();
             $("#questions").html("<h3> Game Over!</h3>");
             $("#answers").append("<h4> correct: " + correctCounter + "</h4>");
@@ -164,20 +178,25 @@ function endPage() {
             $("#answers").append("<h4> Unanswered: " + unansweredCounter + "</h4>");
             $("#reset").show();
             correctCounter = 0;
+            console.log(correctCounter);
             incorrectCounter = 0;
+            console.log(incorrectCounter);
             unansweredCounter = 0;
+            console.log(unansweredCounter);
+
         } else {
             runTimer();
             displayQuestions();
         }
-    // }, 2000)
-}
+    }, 3000);
+
+};
 
 // on click event for done button
-// hide questions
+// empty questions & nswers
 // show results
-// DONE BUTTON
-function reset () {
+// RESET BUTTON
+
 $("#reset").on("click", function () {
     $("#reset").hide();
     $("#answers").empty();
@@ -187,9 +206,4 @@ $("#reset").on("click", function () {
     }
     runTimer();
     displayQuestions();
-})
-}
-
-
-reset ();
-// $("#startBtn").hide();
+});

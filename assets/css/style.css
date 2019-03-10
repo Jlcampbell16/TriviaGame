@@ -1,6 +1,6 @@
 body {
     background-image: url(../images/flamino.jpg);
-    
+    background-size: cover;
   
 }
 
@@ -13,9 +13,19 @@ header {
     
 }
 .container {
-    border: 1px solid pink;
+    border: 2px solid pink;
     width: 500px;
     margin: 0 auto;
     margin-top: 20px;
     text-align: center;
+}
+
+#answers {
+    font-size: 20px;
+}
+
+.answerChoice:hover {
+    width: auto;
+    background-color: pink;
+    cursor: pointer;
 }
