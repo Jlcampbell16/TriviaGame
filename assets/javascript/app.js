@@ -56,14 +56,10 @@ var questionCount = questionsArray.length;
 var index;
 
 
-console.log(questionsArray)
 
 // -----------------------------------------------------------------------
 
 $("#reset").hide();
-
-
-
 
 //START BUTTON
 $("#startBtn").on("click", function () {
@@ -74,7 +70,6 @@ $("#startBtn").on("click", function () {
         holder.push(questionsArray[i]);
     }
 });
-
 
 //START TIMER
 function runTimer() {
@@ -121,7 +116,7 @@ function displayQuestions() {
     index = Math.floor(Math.random() * questionsArray.length);
     pick = questionsArray[index];
 
-    $("#questions").html("<h2>" + pick.question + "</h2>");  //PICK.QUESTION? 
+    $("#questions").html("<h2>" + pick.question + "</h2>"); 
     for (var i = 0; i < pick.answerList.length; i++) {
         var userChoice = $("<div>");
         userChoice.addClass("answerChoice");
@@ -154,7 +149,6 @@ function displayQuestions() {
 //add the correct answers & incorrect answer
 //display correct answers & incorrect answers on the page
 function page() {
-console.log("page function running")
     newArray.push(pick);
     // questionsArray.splice(index, 1);
 
@@ -164,7 +158,6 @@ console.log("page function running")
         
 
         if ((incorrectCounter + correctCounter + unansweredCounter) === questionCount) {
-           console.log ("checking page function if else")
             $("#questions").empty();
             $("#questions").html("<h3> Game Over!</h3>");
             $("#answers").append("<h4> Correct: " + correctCounter + "</h4>");
@@ -173,11 +166,8 @@ console.log("page function running")
             $("#reset").show();
             $("#timer").hide();
             correctCounter = 0;
-            console.log(correctCounter);
             incorrectCounter = 0;
-            console.log(incorrectCounter);
             unansweredCounter = 0;
-            console.log(unansweredCounter);
 
         } else {
             runTimer();
