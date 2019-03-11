@@ -1,6 +1,9 @@
 body {
     background-image: url(../images/flamino.jpg);
-    background-size: cover;
+    background-size: 100%;
+    background-attachment: fixed;
+    color: grey;
+
 }
 
 header {
@@ -17,6 +20,7 @@ header {
     margin: 0 auto;
     margin-top: 20px;
     text-align: center;
+    padding: 10px;
 }
 
 #answers {
@@ -27,4 +31,10 @@ header {
     width: auto;
     background-color: pink;
     cursor: pointer;
+}
+
+#startBtn, #reset {
+    background-color: lightgoldenrodyellow;
+    color: black;
+    border: none;
 }

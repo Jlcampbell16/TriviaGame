@@ -20,7 +20,7 @@ var questionsArray = [
         answer: 3
     },
     {
-        question: "Which newborn baby whale can gain weight at the rate of 10 per hour?",
+        question: "Which newborn baby whale can gain weight at the rate of 10lbs per hour?",
         answerList: ["Blue Whale", "Killer Whale", "Sperm Whale", "Humpback Whale"],
         answer: 0
     },
@@ -47,7 +47,7 @@ var correctCounter = 0;
 var incorrectCounter = 0;
 var unansweredCounter = 0;
 var timerInterval;
-var timer = 20;
+var timer = 21;
 var running = false;
 var pick;
 var newArray = [];
@@ -64,12 +64,7 @@ $("#reset").hide();
 
 
 
-// start page with a start button 
-// create an onclick event
-//hide start button
-//display the timer
-//run the timer funtion
-//display questions
+
 //START BUTTON
 $("#startBtn").on("click", function () {
     $("#startBtn").hide();
@@ -80,8 +75,7 @@ $("#startBtn").on("click", function () {
     }
 });
 
-//run timer
-//clear it each time
+
 //START TIMER
 function runTimer() {
     clearInterval(timerInterval);
@@ -91,9 +85,7 @@ function runTimer() {
     };
 };
 
-//count down the timer
-//if the counter reached 0, go the to results page
-//alter "time's up"
+
 //COUNTDOWN TIMER
 function decrement() {
     timer--;
@@ -103,7 +95,7 @@ function decrement() {
     if (timer === 0) {
         // clearInterval(timerInterval)
         stop();
-        $("#answers").html("<p> Time is up! The correct answer is: " + pick[pick.answer] + "</p>");
+        $("#answers").html("<p> Time is up!<br> The correct answer is: " + pick.answerList[pick.answer] + "</p>");
         unansweredCounter++;
         page();
     }
@@ -129,7 +121,7 @@ function displayQuestions() {
     index = Math.floor(Math.random() * questionsArray.length);
     pick = questionsArray[index];
 
-    $("#questions").html("<h2>" + pick.question + "</h2>")  //PICK.QUESTION? 
+    $("#questions").html("<h2>" + pick.question + "</h2>");  //PICK.QUESTION? 
     for (var i = 0; i < pick.answerList.length; i++) {
         var userChoice = $("<div>");
         userChoice.addClass("answerChoice");
@@ -150,9 +142,10 @@ function displayQuestions() {
             stop();
             incorrectCounter++;
             userGuess = "";
-            $("#answers").html("<p>Nice try! The correct answer is: " + pick.answerList[pick.answer] + "</p>");
+            $("#answers").html("<p>Nice try!<br> The correct answer is: " + pick.answerList[pick.answer] + "</p>");
             page();
         }
+        
     });
 };
 
@@ -163,21 +156,22 @@ function displayQuestions() {
 function page() {
 console.log("page function running")
     newArray.push(pick);
-    questionsArray.splice(index, 1);
+    // questionsArray.splice(index, 1);
 
     var nextPage = setTimeout(function () {
         $("#answers").empty();
-        timer = 20;
+        timer = 21;
         
 
         if ((incorrectCounter + correctCounter + unansweredCounter) === questionCount) {
            console.log ("checking page function if else")
             $("#questions").empty();
             $("#questions").html("<h3> Game Over!</h3>");
-            $("#answers").append("<h4> correct: " + correctCounter + "</h4>");
+            $("#answers").append("<h4> Correct: " + correctCounter + "</h4>");
             $("#answers").append("<h4> Incorrect: " + incorrectCounter + "</h4>");
             $("#answers").append("<h4> Unanswered: " + unansweredCounter + "</h4>");
             $("#reset").show();
+            $("#timer").hide();
             correctCounter = 0;
             console.log(correctCounter);
             incorrectCounter = 0;
