@@ -5,3 +5,5 @@ This trivia game includes 8 trivia questions about animals. You will have 20 sec
 I hope you learn something new! 
 
 P.S.The questions are picked randomly, so you may see the same question twice. 
+
+https://jlcampbell16.github.io/TriviaGame/
